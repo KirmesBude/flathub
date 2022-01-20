@@ -1,21 +1,25 @@
 id: org.freedesktop.Platform.VulkanLayer.gamescope
-default-branch: stable
+default-branch: '21.08'
 sdk: org.freedesktop.Sdk//21.08
 runtime: org.freedesktop.Platform
 runtime-version: '21.08'
-build-extension: true # TODO: set to to true and commit to an extension point
+build-extension: true
 appstream-compose: false
 command: gamescope
 build-options:
+  prefix: /usr/lib/extensions/vulkan/gamescope
+  prepend-path: /usr/lib/extensions/vulkan/gamescope/bin
+  prepend-pkg-config-path: /usr/lib/extensions/vulkan/gamescope/lib/pkgconfig
+  env:
+    ACLOCAL_PATH: "/usr/share/aclocal:/usr/lib/extensions/vulkan/gamescope/share/aclocal"
   strip: true
 modules:
-  # TODO: put the other stuff somewhere else, so I have a clean bin folder
   - modules/xres.yml
   - modules/libinput.yml
   - modules/libseat.yml
   - modules/xwayland.yml
-  - modules/wayland.yml
-  - modules/libdrm.yml
+  - modules/wayland.yml # Workaround: 21.08 ships older version
+  - modules/libdrm.yml # Workaround: 21.08 ships older version
 
   # TODO: 32bit variant
   - name: gamescope
@@ -46,4 +50,6 @@ modules:
       - type: file
         path: org.freedesktop.Platform.VulkanLayer.gamescope.metainfo.xml
 
-# TODO: cleanup
+cleanup:
+  - /share/aclocal
+  - /include
