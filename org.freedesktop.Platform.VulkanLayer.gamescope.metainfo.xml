@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>org.freedesktop.Platform.VulkanLayer.gamescope</id>
+  <extends>org.freedesktop.Platform</extends>
+  <name>gamescope</name>
+  <summary>SteamOS session compositing window manager </summary>
+  <url type="homepage">https://github.com/Plagman/gamescope</url>
+  <url type="bugtracker">https://github.com/Plagman/gamescope/issues</url>
+  <project_license>BSD</project_license>
+  <metadata_license>BSD 2-Clause "Simplified"</metadata_license>
+</component>

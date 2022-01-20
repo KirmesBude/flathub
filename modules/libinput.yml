@@ -1,0 +1,30 @@
+---
+name: libinput
+buildsystem: meson
+config-opts:
+  - '-Dlibwacom=false'
+  - '-Ddebug-gui=false'
+  - '-Dtests=false'
+sources:
+- type: git
+  url: https://gitlab.freedesktop.org/libinput/libinput.git
+  tag: '1.19.3'
+  commit: 11f878df884adc3a13d1df8b40c1947616283ef8
+
+modules:
+  - name: mtdev
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://bitmath.org/code/mtdev/mtdev-1.1.6.tar.gz
+        sha256: 1325f389a2f25cd5f5a8ea4d29aad24aa7c3ec30401d679400dd79eb9c0a8dbb
+  - name: libevdev
+    buildsystem: meson
+    config-opts:
+      - '-Dtests=disabled'
+      - '-Ddocumentation=disabled'
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/libevdev/libevdev.git
+        tag: 'libevdev-1.12.0'
+        commit: 69403a63ed29a1ee62edb8d0885fa770dd9a53cf

@@ -1,0 +1,10 @@
+---
+name: xfont2
+buildsystem: autotools
+sources:
+  - type: git
+    url: https://gitlab.freedesktop.org/xorg/lib/libxfont.git
+    tag: 'libXfont2-2.0.5'
+    commit: 3a4f68284c5aeea77789af1fe395cac35efc8562
+modules:
+  - xfont2/libfontenc.yml

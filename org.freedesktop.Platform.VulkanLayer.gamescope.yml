@@ -1,0 +1,49 @@
+id: org.freedesktop.Platform.VulkanLayer.gamescope
+default-branch: stable
+sdk: org.freedesktop.Sdk//21.08
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+build-extension: true # TODO: set to to true and commit to an extension point
+appstream-compose: false
+command: gamescope
+build-options:
+  strip: true
+modules:
+  # TODO: put the other stuff somewhere else, so I have a clean bin folder
+  - modules/xres.yml
+  - modules/libinput.yml
+  - modules/libseat.yml
+  - modules/xwayland.yml
+  - modules/wayland.yml
+  - modules/libdrm.yml
+
+  # TODO: 32bit variant
+  - name: gamescope
+    buildsystem: meson
+    config-opts:
+      - '-Dpipewire=enabled'
+      - '--wrap-mode=nodownload'
+    sources:
+      - type: git
+        url: https://github.com/Plagman/gamescope.git
+        tag: '3.10.7'
+        commit: d22003025c0d26839621fb17d5657859cd518889
+    # TODO: automatically create this from a script; basically get master commit based on gamescope tag commit date ?
+      - type: git
+        url: https://github.com/nothings/stb.git
+        branch: master
+        dest: subprojects/stb
+      - type: shell
+        commands:
+          - 'install -t subprojects/stb/ subprojects/packagefiles/stb/*'
+
+  - name: metadata
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 -t ${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
+      - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}
+    sources:
+      - type: file
+        path: org.freedesktop.Platform.VulkanLayer.gamescope.metainfo.xml
+
+# TODO: cleanup

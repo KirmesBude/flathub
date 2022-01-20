@@ -1,0 +1,8 @@
+---
+name: xres
+buildsystem: autotools
+sources:
+  - type: git
+    url: https://gitlab.freedesktop.org/xorg/lib/libxres.git
+    tag: 'libXres-1.2.1'
+    commit: c05c6d918b0e2011d4bfa370c321482e34630b17

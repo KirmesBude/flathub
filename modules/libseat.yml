@@ -1,0 +1,12 @@
+---
+name: libseat
+buildsystem: meson
+config-opts:
+  - '-Dlibseat-seatd=disabled'
+  - '-Dserver=disabled'
+  - '-Dman-pages=disabled'
+sources:
+  - type: git
+    url: https://git.sr.ht/~kennylevinsen/seatd
+    tag: '0.6.3'
+    commit: 88db55f6068c1c01d85b61aa6adff0a6b2a8dce8
